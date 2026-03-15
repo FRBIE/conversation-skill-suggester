@@ -36,6 +36,11 @@ Analyze the latest user request and recent chat context, then propose skill reco
 - For each: what it solves, why now, risk note, install command
 - End with one suggested default: "I recommend installing X first"
 
+6. Attach security vet instructions by default:
+- Always include a pre-install vet step using `skill-vetter`
+- If source is unknown or newly published, mark as `vet required` before install
+- Provide a one-line vet command or checklist item the user can run immediately
+
 ## Output Template
 
 Use this compact format:
@@ -48,6 +53,7 @@ Use this compact format:
   2) <skill-name> - <why it fits in one line>
      - Install: `<command>`
      - Risk: <low/medium/high + one reason>
+- Vet step: use `skill-vetter` on selected skill before install
 - Suggested first step: <single best next action>
 
 ## Guardrails
@@ -56,7 +62,8 @@ Use this compact format:
 - Prefer safer, smaller-scope skills over powerful but risky skills.
 - If confidence is low, ask one clarifying question before recommending.
 - Never auto-install without explicit user confirmation.
-- For unknown third-party skills, run a security vet step before install.
+- Run `skill-vetter` before installing any third-party skill.
+- For unknown third-party skills, require explicit user approval after vetting.
 
 ## Chinese Interaction Style
 
